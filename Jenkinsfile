@@ -1,40 +1,40 @@
 pipeline
 {
 agent any
-tools{
-maven'maven'
-}
-stages{
-stage('Checkout')
-{
+ tools{
+ maven 'maven'
+ }
+ stages{
+ stage('Checkout')
+ {
 	steps{
 	git branch: 'master' , url: 'https://github.com/Palak-Paliwal2004/MavenApp.git'
 	}
-}
-stage('Build')
-{
+ }
+ stage('Build')
+ {
 	steps{
 	sh 'mvn clean package'
 	}
-}
-stage('Test')
-{
+ }
+ stage('Test')
+ {
 	steps{
 	sh 'mvn test'
 	}
-}
-stage('Running Application')
+ } 
+ stage('Running Application')
 {
 	steps{
 	sh 'java -jar target/MavenApp-1.0-SNAPSHOT.jar'
 	}
-}
+ }
 }
 post{
-success{
+ success{
 	echo 'Build successful'
-}
-failure{
+ }
+ failure{
 	echo 'Try again'
 	}
 }
